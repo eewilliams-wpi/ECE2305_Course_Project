@@ -34,4 +34,4 @@ def isLight(count, threshold):
 
 if __name__=='__main__':
     count = rc_time(circuitPin)
-    isLight(count)
+    isLight(count, threshold)

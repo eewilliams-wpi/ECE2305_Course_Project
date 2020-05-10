@@ -1,4 +1,5 @@
 import os
+import getpass
 
 def setup_phone():
     phone = int(input("Please enter your 10-digit phone number (no spaces or punctuation): "))
@@ -42,7 +43,8 @@ def setup_phone():
         raise SystemError('Invalid phone number or carrier.')
 
     SSID = input("Please enter your WIFI network SSID: ")
-    PSK = input("Please enter your WIFI network password: ")
+    #PSK = input("Please enter your WIFI network password: ")
+    PSK = getpass.getpass()
     os.system("sudo echo 'network={\n\tssid=\"" + SSID + "\"\n\tpsk=\"" + PSK + "\"\n}' >> /etc/wpa_supplicant/wpa_supplicant.conf")
     print("Setup Complete. You may need to restart your device.")
 

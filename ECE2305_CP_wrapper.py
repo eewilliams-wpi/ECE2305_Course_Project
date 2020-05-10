@@ -2,15 +2,14 @@
 #Authors: Emma Williams, Adam Yang, Tom Nurse, Sami Saif
 #Wrapper Module
 
-#import light_sensor
 import CP_Raspberry_Pi_Code as CPC
 import setup
-#import reg
 import smtp
 import time
 import asyncio
 
-circuitPin = 7
+circuitPin = 7 #digital GPIO pin on Raspberry Pi
+threshold = 1000 #Value at which light sensor changes from light to dark
 
 def wrapper():
     #Display a welcome message
@@ -25,11 +24,9 @@ def wrapper():
     async def checkLightSensor():
         while True:
             await asyncio.sleep(1)
-            if (CPC.isLight(CPC.rc_time(circuitPin)) == True): #Light is detected
-                #event.set()
+            if (CPC.isLight(CPC.rc_time(circuitPin), threshold) == True): #Light is detected
                 smtp.send() #Send the "You've got mail!" text to user's phone
                 print('Mail has arrived!')
-                #event.clear()
                 time.sleep(300) #Wait 5 minutes
         
     loop = asyncio.get_event_loop()

@@ -4,9 +4,6 @@ import math
 
 GPIO.setmode(GPIO.BOARD)
 
-#int pin_to_circuit = 7
-circuitPin = 7
-
 #Calculates how how long it takes for the capacitor to charge
 def rc_time(circuitPin):
     count = 0;
@@ -23,19 +20,12 @@ def rc_time(circuitPin):
     while (GPIO.input(circuitPin) == GPIO.LOW):
         count += 1
 
-    return count;  #count;
-
-
-# Calculates the resistance of the photoresistor based on the time taken to fully charge
-def calcResistance(capacitance, time):
-       return (-1 * time)/(capacitance * math.log(0.25, math.e));
+    return count;
 
 # Threshold: there will be a threshold to determine whether or not the resistance of the photoresistor
 # is high or low enough for it be considered light or dark.
-def isLight(count): #resistance
-    #threshold;
-    threshold = 1000
-    if(count < threshold): #resistance
+def isLight(count, threshold): 
+    if(count < threshold): 
         return True
         print('isLight = True')
     else:
